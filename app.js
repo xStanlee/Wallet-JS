@@ -177,7 +177,7 @@ let UIController = (function(){
         dateLabel: '.budget__title--month'
     };
     
-      
+
     let formatNumber = function(num, type) {
             let numSplit, int, dec;
             
@@ -196,7 +196,7 @@ let UIController = (function(){
             return (type === 'exp' ?  '-' : '+') + ' ' + int + '.' + dec;
     };
     
-     let nodeListForEach = function(list, callback){
+    let nodeListForEach = function(list, callback){
                 for (let i = 0; i < list.length; i++) {
                     callback(list[i], i);
                 }
@@ -220,13 +220,13 @@ let UIController = (function(){
             
             // Create HTML string with placeholder
             
-             if(type === 'inc') {
+            if(type === 'inc') {
             
                 element = DOMStrings.incomeContainer;
                 html = '<div class="item clearfix" id="inc-%id%"><div class="item__description">%description%</div><div class="right clearfix"><div class="item__value">%value%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>';
 
-             } else if (type === 'exp') {
-             
+            } else if (type === 'exp') {
+            
                 element = DOMStrings.expensesContainer;
                 html =  '<div class="item clearfix" id="exp-%id%"><div class="item__description">%description%</div><div class="right clearfix"><div class="item__value">%value%</div><div class="item__percentage">21%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>'
             
@@ -263,19 +263,19 @@ let UIController = (function(){
             },
         
         displayBudget: function(obj){
-         
+        
             let type;
             
-           obj.budget > 0 ? type = 'inc' : type = 'exp'; 
+        obj.budget > 0 ? type = 'inc' : type = 'exp'; 
             document.querySelector(DOMStrings.budgetLabel).textContent = formatNumber(obj.budget, type);
             document.querySelector(DOMStrings.incomeLabel).textContent = formatNumber(obj.totalInc, 'inc');
             document.querySelector(DOMStrings.expensesLabel).textContent = formatNumber(obj.totalExp, 'exp');
-          
+    
             
             if(obj.percentage > 0){
-                 document.querySelector(DOMStrings.percentageLabel).textContent = obj.percentage + '%';
+                document.querySelector(DOMStrings.percentageLabel).textContent = obj.percentage + '%';
             } else {
-                 document.querySelector(DOMStrings.percentageLabel).textContent = '---';
+                document.querySelector(DOMStrings.percentageLabel).textContent = '---';
             }
         },
         
@@ -306,18 +306,17 @@ let UIController = (function(){
             document.querySelector(DOMStrings.dateLabel).textContent = months[month] + ' ' + year;
         },
         
-         changedType: function(){
+        changedType: function(){
             
             let fields = document.querySelectorAll( DOMStrings.inputType +',' +
                                                     DOMStrings.inputDescription + ',' +
                                                     DOMStrings.inputValue
-                                                   
             );
-             
+            
             nodeListForEach(fields, function(cur){
                 cur.classList.toggle('red-focus');
             });
-             
+            
             document.querySelector(DOMStrings.inputBtn).classList.toggle('red');
 },
         
