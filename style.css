@@ -28,8 +28,25 @@ body {
 .red-focus:focus { border: 1px solid #FF5049 !important; }
 
 /**********************************************
+*** KEYFRAMES
+**********************************************/
+
+@keyframes pulsate {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.12);    
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/**********************************************
 *** TOP PART
 **********************************************/
+
 
 .top {
     height: 40vh;
@@ -53,6 +70,31 @@ body {
     text-align: center;
     margin-bottom: 10px;
     font-weight: 300;
+}
+
+
+.currencies__input {
+    border: none;
+    border-radius: .4rem;
+    margin-top: 1rem;
+    font-family: inherit;
+    font-size: inherit;
+    color: #fff;
+    background-color: transparent;
+    box-shadow: 6px -4px 29px -1px rgba(0,0,0,0.2);
+    will-change: animation;
+    text-align: center;
+
+}
+
+.currencies__input:focus {
+    animation: pulsate 1.3s;
+    text-align: inherit;
+}
+
+.currencies__input::placeholder {
+    text-transform: uppercase;
+    text-align: inherit;
 }
 
 .budget__value {
@@ -275,4 +317,3 @@ h2 {
 
 .unpaid .item__percentage { box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1); }
 .unpaid:hover .item__description { font-weight: 900; }
-

@@ -1,13 +1,39 @@
+///////////////////////////////////////
+// FETCH API's
 
+let PLN;
+let euroToPLN = document.querySelector('#current__currency'); // place to show value
 
+async function getCurrencies() {
+    
+    
+    const money_api_host = 'http://data.fixer.io/api/';
+    let endpoint = 'latest?access_key=';
+    const api_key = 'afd3a9e8b13383f316b50c6f0ef19c66';
+
+    let my_money_api_host = `${money_api_host}${endpoint}${api_key}` // source to jsonFile
+
+    try {
+        const result = await fetch(my_money_api_host);
+        const data = await result.json();
+        PLN = data["rates"]["PLN"];
+        console.log(PLN); // POUNDS working
+        //euroToPLN.insertAdjacentHTML('afterbegin', "1 euro is " + PLN + " polskich zlotych");
+    } catch(error) {
+        alert('Something went wrong!');
+    }
+}
+getCurrencies();
+
+    setTimeout(function(){euroToPLN.textContent = `1 Euro is ${PLN} Zlotych`;}, 2500);
     // BUDGET CONTROLLER
 
 let budgetController = (function() {
     
     // Constructors
     
-   let Expense = function(id, description, value, percentage) {
-       
+    let Expense = function(id, description, value, percentage) {
+
     this.id = id;
     this.description = description;
     this.value = value;
@@ -25,14 +51,14 @@ let budgetController = (function() {
     Expense.prototype.getPercentages = function() {
         return this.percentage;
     };
-   
-   let Income = function(id, description, value) {
-       
+
+    let Income = function(id, description, value) {
+    
     this.id = id;
     this.description = description;
     this.value = value;
 };
-  
+
     let calculateTotal = function(type) {
         let sum = 0;
         data.allItems[type].forEach(function(cur){
@@ -40,7 +66,7 @@ let budgetController = (function() {
         });
         data.totals[type] = sum;
     }
-   
+
     let data = {
         allItems: {
         exp: [],
@@ -75,7 +101,7 @@ let budgetController = (function() {
             } else if (type === 'inc') {
                 newItem = new Income(ID, des, val);
             }
-          
+        
             // Push into our data structure
             
             data.allItems[type].push(newItem);
@@ -87,7 +113,7 @@ let budgetController = (function() {
         
         deleteItem: function(type, id){
             let ids, index;
-          
+        
                 ids = data.allItems[type].map(function(current){
                 
                 return current.id;
@@ -132,7 +158,7 @@ let budgetController = (function() {
                         
         getPercentages: function() {
             let allPerc = data.allItems.exp.map(function(cur){
-               return cur.getPercentages(); 
+                return cur.getPercentages(); 
             });
             return allPerc;
         
@@ -176,7 +202,6 @@ let UIController = (function(){
         expensesPercLabel: '.item__percentage',
         dateLabel: '.budget__title--month'
     };
-    
 
     let formatNumber = function(num, type) {
             let numSplit, int, dec;
@@ -338,7 +363,7 @@ let controller = (function(budgetCtrl, UICtrl){
     let setupEventListeners = function(){
         
             let DOM = UICtrl.getDOMStrings(); // New object same references!
-           
+        
             document.querySelector(DOM.inputBtn).addEventListener('click', ctrlAddItem);
 
             document.addEventListener('keypress', function(eventHandler) {
@@ -379,11 +404,11 @@ let controller = (function(budgetCtrl, UICtrl){
         
         // 2. Read percentages from the budget controller
         
-           let percentages = budgetCtrl.getPercentages();
+        let percentages = budgetCtrl.getPercentages();
         
         // 3. Update UI with values
         
-           UICtrl.displayPercentages(percentages);
+        UICtrl.displayPercentages(percentages);
     }; 
     
     
