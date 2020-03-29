@@ -2,7 +2,7 @@
 // FETCH API's
 
 let PLN;
-let euroToPLN = document.querySelector('#current__currency'); // place to show value
+let euroToPLN = document.querySelector('#current__currency');
 
 async function getCurrencies() {
     
@@ -17,8 +17,7 @@ async function getCurrencies() {
         const result = await fetch(my_money_api_host);
         const data = await result.json();
         PLN = data["rates"]["PLN"];
-        console.log(PLN); // POUNDS working
-        //euroToPLN.insertAdjacentHTML('afterbegin', "1 euro is " + PLN + " polskich zlotych");
+        console.log(PLN);
     } catch(error) {
         alert('Something went wrong!');
     }
