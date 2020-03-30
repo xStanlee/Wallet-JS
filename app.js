@@ -1,7 +1,7 @@
 ///////////////////////////////////////
 // FETCH API's
 
-let PLN;
+let currencyValue;
 let euroToPLN = document.querySelector('#current__currency'); // place to show value
 
 async function getCurrencies() {
@@ -16,16 +16,23 @@ async function getCurrencies() {
     try {
         const result = await fetch(my_money_api_host);
         const data = await result.json();
-        PLN = data["rates"]["PLN"];
-        console.log(PLN); // POUNDS working
-        //euroToPLN.insertAdjacentHTML('afterbegin', "1 euro is " + PLN + " polskich zlotych");
+        cur = data["rates"];
+        console.log(data);
     } catch(error) {
         alert('Something went wrong!');
     }
 }
 getCurrencies();
 
-    setTimeout(function(){euroToPLN.textContent = `1 Euro is ${PLN} Zlotych`;}, 2500);
+    let currency = document.getElementsByName('getcurrency')[0];
+    currency.addEventListener('input', function(){
+        currencyValue = this.value;
+        for (const property in cur){
+            if(property == currencyValue){
+                setTimeout(function(){euroToPLN.textContent = `1 EUR is ${cur[property].toFixed(2)} ${property}`;}, 1500);
+            } 
+        }
+    })
     // BUDGET CONTROLLER
 
 let budgetController = (function() {

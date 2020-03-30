@@ -72,6 +72,18 @@ body {
     font-weight: 300;
 }
 
+#current__currency {
+    text-align: center;
+}
+
+#current__currency::before {
+    content: "( ͡~ ͜ʖ ͡°)";
+    display: block;
+    margin: 1rem 0 .4rem 0;
+    color: inherit;
+}
+
+
 
 .currencies__input {
     border: none;
