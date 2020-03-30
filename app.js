@@ -1,8 +1,13 @@
 ///////////////////////////////////////
 // FETCH API's
 
+<<<<<<< HEAD
 let currencyValue;
 let euroToPLN = document.querySelector('#current__currency'); // place to show value
+=======
+let PLN;
+let euroToPLN = document.querySelector('#current__currency');
+>>>>>>> master
 
 async function getCurrencies() {
     
@@ -16,8 +21,13 @@ async function getCurrencies() {
     try {
         const result = await fetch(my_money_api_host);
         const data = await result.json();
+<<<<<<< HEAD
         cur = data["rates"];
         console.log(data);
+=======
+        PLN = data["rates"]["PLN"];
+        console.log(PLN);
+>>>>>>> master
     } catch(error) {
         alert('Something went wrong!');
     }
